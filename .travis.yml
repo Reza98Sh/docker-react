@@ -1,12 +1,16 @@
-sudo: required
+language: generic
+
+dist: focal
 
 services:
   - docker
 
-
 before_install:
+  - echo "Starting Docker build..."
   - docker build -f Dockerfile.dev -t hitchhiker221/docker-react .
-
+  - echo "Docker build finished."
 
 script:
+  - echo "Running tests inside Docker container..."
   - docker run -e CI=true hitchhiker221/docker-react npm test
+
