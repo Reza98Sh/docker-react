@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+
+before_install:
+  - docker build -f Dockerfile.dev -t hitchhiker221/docker-react .
+
+
+script:
+  - docker run -e CI=true hitchhiker221/docker-react npm test
